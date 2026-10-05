@@ -10,18 +10,28 @@ SUPPORTED_EXTENSIONS = {
 }
 
 
-def load_documents(directory):
+def load_documents(directory, only_files=None):
     """
     Load PDF, TXT and Markdown documents.
 
     PDF page numbers are preserved as metadata.
+
+    If only_files is given (an iterable of paths), just those
+    files are processed instead of rescanning the whole
+    directory — used so re-ingesting doesn't reprocess PDFs
+    that are already indexed.
     """
 
     directory = Path(directory)
 
     documents = []
 
-    for path in sorted(directory.rglob("*")):
+    if only_files is not None:
+        candidates = sorted(Path(path) for path in only_files)
+    else:
+        candidates = sorted(directory.rglob("*"))
+
+    for path in candidates:
 
         if not path.is_file():
             continue

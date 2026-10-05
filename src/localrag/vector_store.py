@@ -71,6 +71,97 @@ def build_faiss_index(
     return index
 
 
+def add_chunks_to_index(
+    new_chunks,
+    new_embeddings
+):
+    """
+    Add new chunks + embeddings into the existing FAISS index
+    (creating one if none exists yet), and merge the new chunk
+    metadata into chunks.json rather than overwriting it.
+
+    Unlike build_faiss_index(), this is additive: it's what
+    ingestion uses so re-ingesting doesn't wipe out documents
+    that are already indexed.
+    """
+
+    if not new_chunks:
+        raise ValueError(
+            "No chunks supplied."
+        )
+
+    if len(new_chunks) != len(new_embeddings):
+        raise ValueError(
+            "Number of chunks and embeddings must match."
+        )
+
+    INDEX_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    matrix = np.asarray(
+        new_embeddings,
+        dtype="float32"
+    )
+
+    faiss.normalize_L2(matrix)
+
+    if FAISS_PATH.exists():
+
+        index = faiss.read_index(
+            str(FAISS_PATH)
+        )
+
+        if index.d != matrix.shape[1]:
+
+            raise ValueError(
+                "New embeddings don't match the existing index's "
+                "dimension. If you've changed embedding models, "
+                "clear the corpus and rebuild from scratch."
+            )
+
+    else:
+
+        dimension = matrix.shape[1]
+
+        index = faiss.IndexFlatIP(
+            dimension
+        )
+
+    index.add(matrix)
+
+    faiss.write_index(
+        index,
+        str(FAISS_PATH)
+    )
+
+    if CHUNKS_PATH.exists():
+
+        existing_chunks = json.loads(
+            CHUNKS_PATH.read_text(
+                encoding="utf-8"
+            )
+        )
+
+    else:
+
+        existing_chunks = []
+
+    all_chunks = existing_chunks + new_chunks
+
+    CHUNKS_PATH.write_text(
+        json.dumps(
+            all_chunks,
+            ensure_ascii=False,
+            indent=2
+        ),
+        encoding="utf-8"
+    )
+
+    return index, all_chunks
+
+
 def load_faiss_index():
 
     if not FAISS_PATH.exists():

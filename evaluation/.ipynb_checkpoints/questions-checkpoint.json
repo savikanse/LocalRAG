@@ -1,0 +1,20 @@
+[
+    {
+        "question": "What is the main objective of the document?",
+        "relevant_sources": [
+            "example.pdf"
+        ]
+    },
+    {
+        "question": "What methodology is described in the document?",
+        "relevant_sources": [
+            "example.pdf"
+        ]
+    },
+    {
+        "question": "What are the main conclusions?",
+        "relevant_sources": [
+            "example.pdf"
+        ]
+    }
+]

@@ -62,15 +62,20 @@ def chunk_text(
 def chunk_documents(
     documents,
     chunk_size=800,
-    overlap=120
+    overlap=120,
+    start_id=0
 ):
     """
     Chunk loaded documents while preserving metadata.
+
+    start_id lets chunk ids continue on from an existing corpus
+    instead of always restarting at 0, so newly ingested chunks
+    don't collide with ids already stored in chunks.json.
     """
 
     chunks = []
 
-    chunk_id = 0
+    chunk_id = start_id
 
     for document in documents:
 

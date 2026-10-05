@@ -3,6 +3,7 @@ from .config import (
     BM25_K,
     RRF_K
 )
+from .reranker import rerank
 
 from .embeddings import embed_query
 
@@ -108,23 +109,8 @@ def retrieve(
     dense_k=DENSE_K,
     bm25_k=BM25_K
 ):
-    """
-    Complete retrieval pipeline:
 
-        Query
-          ↓
-        Embedding
-          ↓
-        Dense retrieval
-          +
-        BM25 retrieval
-          ↓
-        RRF
-    """
-
-    query_embedding = embed_query(
-        query
-    )
+    query_embedding = embed_query(query)
 
     dense_results = dense_search(
         index,
@@ -140,9 +126,16 @@ def retrieve(
         k=bm25_k
     )
 
+    # RRF combines FAISS + BM25
     fused_results = reciprocal_rank_fusion(
         dense_results,
         bm25_results
     )
 
-    return fused_results
+    # Cross-encoder reranks the RRF results
+    reranked_results = rerank(
+        query,
+        fused_results
+    )
+
+    return reranked_results

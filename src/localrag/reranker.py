@@ -2,7 +2,8 @@ from sentence_transformers import CrossEncoder
 
 from .config import (
     RERANK_MODEL,
-    RERANK_K
+    RERANK_K,
+    RERANK_CANDIDATES
 )
 
 
@@ -34,11 +35,21 @@ def rerank(
     """
     Cross-encoder reranking.
 
-    The cross-encoder directly scores:
-        (query, passage)
+    Input:
+        fused_results from RRF
 
-    rather than comparing independently generated
-    embeddings.
+    Expected RRF result:
+        {
+            "chunk": {...},
+            "score": <RRF score>
+        }
+
+    Output:
+        {
+            "chunk": {...},
+            "rrf_score": <RRF score>,
+            "rerank_score": <cross-encoder score>
+        }
     """
 
     if not fused_results:
@@ -46,37 +57,68 @@ def rerank(
 
     model = get_reranker()
 
+    # --------------------------------------------------------
+    # Only score the top RERANK_CANDIDATES fused results.
+    # RRF has already ranked these, so candidates far down the
+    # list are extremely unlikely to end up in the final top K.
+    # Scoring fewer pairs is the single biggest latency lever
+    # in this pipeline, since cross-encoder inference dominates
+    # end-to-end query time.
+    # --------------------------------------------------------
+
+    candidates = fused_results[:RERANK_CANDIDATES]
+
+    # --------------------------------------------------------
+    # Prepare query-passage pairs
+    # --------------------------------------------------------
+
     pairs = [
         (
             query,
             result["chunk"]["text"]
         )
-        for result in fused_results
+        for result in candidates
     ]
+
+    # --------------------------------------------------------
+    # Cross-encoder scores
+    # --------------------------------------------------------
 
     scores = model.predict(
         pairs
     )
 
+    # --------------------------------------------------------
+    # Build final results
+    # --------------------------------------------------------
+
     results = []
 
     for result, score in zip(
-        fused_results,
+        candidates,
         scores
     ):
+
+        # Get RRF score
+        rrf_score = result.get(
+            "score",
+            result.get("rrf_score", 0.0)
+        )
 
         results.append(
             {
                 "chunk": result["chunk"],
-                "score": float(score),
-                "rrf_score": float(
-                    result["score"]
-                )
+                "rrf_score": float(rrf_score),
+                "rerank_score": float(score)
             }
         )
 
+    # --------------------------------------------------------
+    # Sort by cross-encoder score
+    # --------------------------------------------------------
+
     results.sort(
-        key=lambda x: x["score"],
+        key=lambda x: x["rerank_score"],
         reverse=True
     )
 

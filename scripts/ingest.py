@@ -1,109 +1,226 @@
-import sys
-import time
 from pathlib import Path
-
-
-# Add project root to Python path
-ROOT = Path(__file__).resolve().parents[1]
-
-sys.path.insert(
-    0,
-    str(ROOT)
-)
-
+import shutil
+import time
 
 from src.localrag.config import (
-    DOCUMENTS_DIR,
+    PAPERS_DIR,
+    INDEX_DIR,
     CHUNK_SIZE,
-    CHUNK_OVERLAP
+    CHUNK_OVERLAP,
 )
 
-from src.localrag.document_loader import (
-    load_documents
-)
-
-from src.localrag.chunker import (
-    chunk_documents
-)
-
-from src.localrag.embeddings import (
-    embed_texts
-)
-
-from src.localrag.vector_store import (
-    build_faiss_index
-)
-
-from src.localrag.bm25_store import (
-    build_bm25_index
-)
+from .document_loader import load_papers
+from .chunker import chunk_sections
+from .embeddings import embed_texts
+from .indexer import build_indexes
 
 
-def main():
+def clear_previous_corpus():
+    """
+    Remove the previous uploaded documents and indexes.
+    """
 
-    print("=" * 70)
-    print("LocalRAG Document Ingestion")
-    print("=" * 70)
+    if PAPERS_DIR.exists():
+        for item in PAPERS_DIR.iterdir():
+            if item.is_file():
+                item.unlink()
+            elif item.is_dir():
+                shutil.rmtree(item)
 
-    DOCUMENTS_DIR.mkdir(
+    if INDEX_DIR.exists():
+        for item in INDEX_DIR.iterdir():
+            if item.is_file():
+                item.unlink()
+            elif item.is_dir():
+                shutil.rmtree(item)
+
+    PAPERS_DIR.mkdir(
         parents=True,
         exist_ok=True
     )
 
-    # --------------------------------------------------------
-    # Load
-    # --------------------------------------------------------
-
-    print(
-        f"\nLoading documents from:\n"
-        f"{DOCUMENTS_DIR}"
+    INDEX_DIR.mkdir(
+        parents=True,
+        exist_ok=True
     )
 
-    documents = load_documents(
-        DOCUMENTS_DIR
-    )
 
-    if not documents:
+def save_uploaded_files(uploaded_files):
+    """
+    Save Streamlit UploadedFile objects to disk.
+    """
 
-        print(
-            "\nNo PDF, TXT or Markdown documents found."
+    saved_files = []
+
+    for uploaded_file in uploaded_files:
+
+        filename = Path(
+            uploaded_file.name
+        ).name
+
+        if not filename.lower().endswith(".pdf"):
+            continue
+
+        output_path = PAPERS_DIR / filename
+
+        with open(output_path, "wb") as f:
+            f.write(
+                uploaded_file.getbuffer()
+            )
+
+        saved_files.append(
+            output_path
         )
 
-        print(
-            "Add documents to data/documents/"
+    return saved_files
+
+
+def create_paper_metadata(pdf_paths):
+    """
+    Convert locally uploaded PDFs into the metadata
+    format expected by document_loader.py.
+    """
+
+    papers = []
+
+    for path in pdf_paths:
+
+        papers.append({
+            "source": "User Upload",
+            "external_id": path.stem,
+            "doi": None,
+            "title": path.stem,
+            "year": None,
+            "authors": [],
+            "abstract": "",
+            "citation_count": 0,
+            "venue": None,
+            "is_oa": True,
+            "pdf_url": None,
+            "landing_url": None,
+            "type": "uploaded_pdf",
+            "local_pdf": str(path),
+        })
+
+    return papers
+
+
+def ingest_uploaded_pdfs(
+    uploaded_files,
+    progress_callback=None
+):
+    """
+    Complete ingestion pipeline:
+
+    Streamlit upload
+        ↓
+    Save PDFs
+        ↓
+    Extract text
+        ↓
+    Chunk documents
+        ↓
+    Generate Ollama embeddings
+        ↓
+    Build FAISS index
+        ↓
+    Build BM25 index
+    """
+
+    if not uploaded_files:
+        raise ValueError(
+            "No PDF files were uploaded."
         )
 
-        return
+    total_start = time.perf_counter()
 
-    print(
-        f"Loaded {len(documents)} document sections."
+    def progress(value, message):
+        if progress_callback:
+            progress_callback(
+                min(max(value, 0.0), 1.0),
+                message
+            )
+
+    # ---------------------------------------------------------
+    # 1. Clear previous corpus
+    # ---------------------------------------------------------
+
+    progress(
+        0.02,
+        "Clearing previous corpus..."
     )
 
-    # --------------------------------------------------------
-    # Chunk
-    # --------------------------------------------------------
+    clear_previous_corpus()
 
-    print("\nChunking documents...")
+    # ---------------------------------------------------------
+    # 2. Save uploaded PDFs
+    # ---------------------------------------------------------
 
-    chunks = chunk_documents(
-        documents,
+    progress(
+        0.08,
+        "Saving uploaded PDFs..."
+    )
+
+    pdf_paths = save_uploaded_files(
+        uploaded_files
+    )
+
+    if not pdf_paths:
+        raise ValueError(
+            "No valid PDF files were uploaded."
+        )
+
+    papers = create_paper_metadata(
+        pdf_paths
+    )
+
+    # ---------------------------------------------------------
+    # 3. Extract text
+    # ---------------------------------------------------------
+
+    progress(
+        0.20,
+        "Extracting text from PDFs..."
+    )
+
+    sections = load_papers(
+        papers
+    )
+
+    if not sections:
+        raise ValueError(
+            "No text could be extracted from "
+            "the uploaded PDFs."
+        )
+
+    # ---------------------------------------------------------
+    # 4. Chunk documents
+    # ---------------------------------------------------------
+
+    progress(
+        0.35,
+        "Creating document chunks..."
+    )
+
+    chunks = chunk_sections(
+        sections,
         chunk_size=CHUNK_SIZE,
         overlap=CHUNK_OVERLAP
     )
 
-    print(
-        f"Created {len(chunks)} chunks."
+    if not chunks:
+        raise ValueError(
+            "No chunks were created."
+        )
+
+    # ---------------------------------------------------------
+    # 5. Generate embeddings
+    # ---------------------------------------------------------
+
+    progress(
+        0.45,
+        "Generating Ollama embeddings..."
     )
-
-    # --------------------------------------------------------
-    # Embeddings
-    # --------------------------------------------------------
-
-    print(
-        "\nGenerating embeddings with Ollama..."
-    )
-
-    start = time.perf_counter()
 
     texts = [
         chunk["text"]
@@ -114,73 +231,48 @@ def main():
         texts
     )
 
-    embedding_time = (
-        time.perf_counter()
-        - start
+    if len(embeddings) != len(chunks):
+        raise RuntimeError(
+            "Number of embeddings does not match "
+            "number of chunks."
+        )
+
+    # ---------------------------------------------------------
+    # 6. Build FAISS + BM25
+    # ---------------------------------------------------------
+
+    progress(
+        0.85,
+        "Building FAISS and BM25 indexes..."
     )
 
-    print(
-        f"Generated {len(embeddings)} embeddings."
-    )
-
-    print(
-        f"Embedding time: "
-        f"{embedding_time:.2f}s"
-    )
-
-    # --------------------------------------------------------
-    # FAISS
-    # --------------------------------------------------------
-
-    print(
-        "\nBuilding FAISS index..."
-    )
-
-    build_faiss_index(
+    build_indexes(
         chunks,
         embeddings
     )
 
-    print(
-        "FAISS index saved."
+    # ---------------------------------------------------------
+    # 7. Finished
+    # ---------------------------------------------------------
+
+    total_time = (
+        time.perf_counter()
+        - total_start
     )
 
-    # --------------------------------------------------------
-    # BM25
-    # --------------------------------------------------------
-
-    print(
-        "\nBuilding BM25 index..."
+    progress(
+        1.0,
+        "Corpus ready."
     )
 
-    build_bm25_index(
-        chunks
-    )
-
-    print(
-        "BM25 index saved."
-    )
-
-    # --------------------------------------------------------
-    # Done
-    # --------------------------------------------------------
-
-    print("\n" + "=" * 70)
-    print("INGESTION COMPLETE")
-    print("=" * 70)
-
-    print(
-        f"Documents: {len(documents)}"
-    )
-
-    print(
-        f"Chunks:    {len(chunks)}"
-    )
-
-    print(
-        f"Embedding: {embedding_time:.2f}s"
-    )
-
-
-if __name__ == "__main__":
-    main()
+    return {
+        "documents": len(pdf_paths),
+        "pages": len(sections),
+        "chunks": len(chunks),
+        "embedding_count": len(embeddings),
+        "processing_time": total_time,
+        "files": [
+            path.name
+            for path in pdf_paths
+        ],
+    }

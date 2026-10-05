@@ -7,9 +7,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-DATA_DIR = ROOT / "data"
+DATA_DIR = ROOT/ "data"
 
-DOCUMENTS_DIR = DATA_DIR / "documents"
+PAPERS_DIR = DATA_DIR / "documents"
+INDEX_DIR = DATA_DIR / "index"
+
+PAPERS_JSON = PAPERS_DIR / "papers.json"
 INDEX_DIR = DATA_DIR / "index"
 
 FAISS_PATH = INDEX_DIR / "faiss.index"
@@ -27,7 +30,7 @@ LLM_MODEL = "llama3.2:3b"
 
 EMBED_MODEL = "embeddinggemma"
 
-
+JUDGE_MODEL="qwen3:8b"
 # ============================================================
 # RERANKER
 # ============================================================
@@ -53,5 +56,6 @@ DENSE_K = 12
 BM25_K = 12
 
 RRF_K = 60
+RERANK_CANDIDATES = 15
 
 RERANK_K = 5

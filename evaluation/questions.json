@@ -1,20 +1,523 @@
 [
-    {
-        "question": "What is the main objective of the document?",
-        "relevant_sources": [
-            "example.pdf"
-        ]
-    },
-    {
-        "question": "What methodology is described in the document?",
-        "relevant_sources": [
-            "example.pdf"
-        ]
-    },
-    {
-        "question": "What are the main conclusions?",
-        "relevant_sources": [
-            "example.pdf"
-        ]
-    }
+  {
+    "question": "According to Jaishankar, how many different explanations did Beijing give for the May 2020 Ladakh intrusions?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "When did troops from India and China clash in the Galwan Valley, and how does that compare to the last prior armed clash between the two countries?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What four types of rivalry does Raj Verma say characterize the overall India-China relationship?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What triggered the 1967 clashes at Nathu La and Cho La, and how did they turn out for each side?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What was Operation Falcon, and what crisis did it respond to in 1986?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What was the underlying trigger of the 2017 Doklam standoff, and how long did it last?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What two factors does Raj Verma argue jointly explain China's decision to intrude along the LAC in May 2020?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "How does Rishika Chauhan's chapter describe China's 'salami slicing' approach to territorial disputes?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What argument does Mahesh Shankar make about the role of material capabilities in China's 2020 incursions?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What deterrence strategy shift does Sidharth Raimedhi recommend for India, and why does he say the old approach no longer works?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "Why does Avinash Godbole connect the COVID-19 pandemic to China's decision to intrude along the LAC in 2020?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What was the Simla Convention, when was it held, and who were the three parties involved?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "Who proposed the McMahon Line and what territorial change did it involve for India?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What is the difference between the Johnson-Ardagh Line and the Macartney-MacDonald Line in the western sector dispute?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What proposal came out of the 1962 Colombo Conference, and why did India and China interpret it differently?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What military confidence-building measures did India and China agree to in 1996 along the LAC?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What did Deng Xiaoping reportedly tell Rajiv Gandhi about settling the territorial dispute during the 1988 visit to China?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "According to Amit Ranjan, why has China been more flexible in settling border disputes with Central Asian states than with India?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What was the 'ring fence' system that British India used along its northern frontier?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "Why was the Wakhan Corridor created in Afghanistan, and roughly how large was it?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "How did Lord Lansdowne define a 'buffer state' in 1902, and which states did British India treat this way?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "What explanations does the chapter on the Raj's foreign policy give for why British India sometimes acted independently of London?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "What organizations helped fund and host the project behind the Oxford Handbook of Indian Foreign Policy?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "Into which three historical periods do Ganguly and Pardesi divide India's foreign policy since 1947, and what event marks the boundary between the first two?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What were the five principles of Panchsheel that India pursued toward China before 1962?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What phrase did economist Raj Krishna coin to describe India's growth rate, and what caused it according to the article?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What three factors does the article say combined to produce India's 1991 balance-of-payments crisis?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "Why was Nehru described as temperamentally skeptical of the United States despite being a Western liberal?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What two critical roles does Rahul Mishra say the Non-Aligned Movement played in shaping the post-war world order?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "Who does Jaishankar credit with first floating the term 'multi-alignment', and where did he acknowledge this?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "What made the 1955 Bandung Conference significant for the launch of the Non-Aligned Movement, and which Western countries opposed it?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "How does Harsh Vardhan Shringla define 'strategic autonomy' in his 2020 National Defence College address?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "Why did India sign the Indo-Soviet Treaty of Peace, Friendship, and Cooperation in 1971, and what did this mean for its non-aligned status?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "What did C. Raja Mohan identify as the subtext of the George W. Bush administration's policies toward India?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What two bilateral agreements resulted from India's positive response to the Bush-era approach, and what did each open the door to?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "How did Beijing interpret the 2005 defense framework and the civil nuclear initiative between India and the US, according to Raja Mohan?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What three domestic political constituencies in India does Raja Mohan say are wary of a tight military alignment with the US against China?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "Why does Raja Mohan argue that India will never accept a 'Sino-centric Asia'?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What considerations temper Indian enthusiasm for the US pivot to Asia, according to the article?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "As of the article's writing, roughly how much larger were China's GDP and defense spending compared to India's?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "Compare how the border-dispute overview and the India-China rivalry special issue each describe the role of the 1962 war in shaping the current LAC dispute.",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "How is the concept of a colonial-era 'buffer state' connected to the origins of the India-China boundary dispute across the sources discussing British India's frontier policy and the boundary's history?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf",
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "How does India's shift toward 'self-help' and eventually 'multi-alignment' relate to its threat perception of China, drawing on both the sixty-years survey and the non-alignment-to-multi-alignment article?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf",
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "Which sources discuss India's 1961 'Forward Policy', and what do they each say prompted its adoption?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What role does Tibet play in both the historical territorial dispute and the contemporary India-China rivalry, according to the boundary overview and the rivalry special issue?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "How did the 1962 India-China war affect India's standing within the Non-Aligned Movement and its Afro-Asian peers?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf",
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What is the 'Five Fingers of Tibet' theory, and how does the India-China rivalry special issue evaluate its credibility as an explanation for China's actions?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "Compare how 'strategic autonomy' is framed in the 2013 Raja Mohan piece on the US pivot versus the 2023 article on India's shift to multi-alignment.",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf",
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "How does India's cautious response to the US 'pivot to Asia' described by Raja Mohan connect to the widening gap in material capabilities with China discussed in the rivalry special issue?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What explanations do the sources give for why India's military was unprepared for China's attack in October 1962?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What has been the biggest obstacle to India and China actually resolving their territorial disagreement, despite decades of talks?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "How has India's slower economic growth historically limited its ability to project power internationally?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "Why do both India and China see themselves as natural candidates to lead Asia?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What lesson did India take from its experience under colonial rule that continues to shape how it engages with more powerful countries?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf",
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "How has India's sense of threat from China changed across different decades since independence?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "Where does the idea of a shifting balance of power between two rising countries show up in explaining recent tensions?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "In what ways did geography and terrain shape the historical territorial disputes along India's northern frontiers?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf",
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf"
+    ]
+  },
+  {
+    "question": "What steps have the two countries taken over the years to keep border tensions from spiraling into open conflict?",
+    "relevant_sources": [
+      "INDIA-CHINA BOUNDARY DISPUTES AN OVERVIEW.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "How has India tried to avoid becoming too closely tied to any single major power across different periods of its diplomatic history?",
+    "relevant_sources": [
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf",
+      "Explaining Sixty Years of India s Foreign Policy.pdf",
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What part has domestic public sentiment played in limiting how far Indian leaders can go in aligning with outside powers?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf",
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "Why might a scholar argue that a border dispute is really about something other than the territory itself?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "What does the historical concept of a protective zone between rival empires have to do with how India's frontiers came to be drawn?",
+    "relevant_sources": [
+      "David Malone 77 pages.pdf"
+    ]
+  },
+  {
+    "question": "What kind of gap in resources or capacity between two countries can make one side more willing to take risks along a disputed frontier?",
+    "relevant_sources": [
+      "India China rivalry border dispute border standoffs and crises.pdf",
+      "Indias Strategic Autonomy in Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "How did India's approach to a rising external threat change once it could no longer rely on limiting its own defense spending?",
+    "relevant_sources": [
+      "Explaining Sixty Years of India s Foreign Policy.pdf"
+    ]
+  },
+  {
+    "question": "What tension exists between wanting closer security ties with a powerful partner and wanting to preserve independent decision-making?",
+    "relevant_sources": [
+      "Indias Strategic Autonomy in Foreign Policy.pdf",
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "What three-layered concept of India's security did Sir Girija Shankar Bajpai articulate, according to Sikri?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "What are the five 'arcs' that Rajiv Sikri says intersect at India's geographic location?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "Why does Sikri argue India could exert more global clout than China if it reached the same economic size?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "What does Sikri identify as one of India's biggest handicaps in crafting a coherent foreign policy vision?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "What limits does Sikri describe in the India-US relationship despite shared democratic values?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "According to Sikri, when did India's leaders most notably assert the country's strategic autonomy?",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf"
+    ]
+  },
+  {
+    "question": "What treaty did India and Russia sign in 1971, and how did the 1993 treaty that replaced it differ from it?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf"
+    ]
+  },
+  {
+    "question": "What do Warren and Ganguly argue will happen to India-Russia relations as a result of Russia's invasion of Ukraine?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf"
+    ]
+  },
+  {
+    "question": "What signs of a shift in India's stance toward Russia does the article point to after the invasion of Ukraine, including at the 2022 SCO summit?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf"
+    ]
+  },
+  {
+    "question": "Why might Russia's growing isolation push it closer to China, and what risk does the article say this poses for India?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf"
+    ]
+  },
+  {
+    "question": "What historical factors does the article cite as driving the original Sino-Soviet split in the early 1960s?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf"
+    ]
+  },
+  {
+    "question": "What does Chris Ogden mean by describing India-China relations as a 'double-edged sword'?",
+    "relevant_sources": [
+      "ogden-2022-the-double-edged-sword-reviewing-india-china-relations.pdf"
+    ]
+  },
+  {
+    "question": "How does Ogden define 'threat perception', and whose definition does he draw on?",
+    "relevant_sources": [
+      "ogden-2022-the-double-edged-sword-reviewing-india-china-relations.pdf"
+    ]
+  },
+  {
+    "question": "What commonalities does Ogden identify between India and China despite their rivalry?",
+    "relevant_sources": [
+      "ogden-2022-the-double-edged-sword-reviewing-india-china-relations.pdf"
+    ]
+  },
+  {
+    "question": "What does Ogden say a security-dilemma reading of India-China relations implies about how each side interprets the other's strategic actions?",
+    "relevant_sources": [
+      "ogden-2022-the-double-edged-sword-reviewing-india-china-relations.pdf"
+    ]
+  },
+  {
+    "question": "How do Warren and Ganguly's concerns about a closer Russia-China alignment connect to the broader account of India's threat perception of China in the rivalry special issue?",
+    "relevant_sources": [
+      "India_russia_Ganguly.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  },
+  {
+    "question": "Compare how Sikri and the multi-alignment article each describe the value and history of India's strategic autonomy.",
+    "relevant_sources": [
+      "Ambassador_Sikri_s_article-ChallengeStrategyRethinking-2014.pdf",
+      "From non-alignment to multi-alignment assessing India s foreign policy shift.pdf"
+    ]
+  },
+  {
+    "question": "How does Ogden's 'double-edged sword' framing compare to Verma's description of the India-China relationship as positional, spatial, enduring, and strategic rivalry?",
+    "relevant_sources": [
+      "ogden-2022-the-double-edged-sword-reviewing-india-china-relations.pdf",
+      "India China rivalry border dispute border standoffs and crises.pdf"
+    ]
+  }
 ]
